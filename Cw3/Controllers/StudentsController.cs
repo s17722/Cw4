@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Cw3.DAL;
 using Cw3.Models;
+using Cw3.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cw3.Controllers
@@ -13,31 +15,53 @@ namespace Cw3.Controllers
 
     public class StudentsController : ControllerBase
     {
-        private readonly IDbService _dbService;
+        private const string ConString = "Data Source=db-mssql;Initial Catalog=s17722;Integrated Security=True";
+        //private readonly IDbService _dbService;
 
+        /*
         public StudentsController(IDbService dbService)
         {
             _dbService = dbService;
         }
+         */
 
+        private readonly IStudentsDal _dbStudentService;
 
+        public StudentsController(IStudentsDal dbService)
+        {
+            _dbStudentService = dbService;
+        }
+
+        //ZAD 4.2
         [HttpGet]
-        public IActionResult GetStudent(string orderBy)
+        public IActionResult GetStudentByEnrollment()
         {
-            return Ok(_dbService.GetStudents());
+            return Ok(_dbStudentService.GetStudentsByEnrollment());
+        }
+
+        //ZAD 4.3
+        [HttpGet("{indexNumber}")]
+        public IActionResult GetStudentBySemester(string indexNumber)
+        {
+            return Ok(_dbStudentService.GetStudentBySemester(indexNumber));
         }
 
 
-        [HttpGet("{id}")]
-        public IActionResult GetStudent(int id)
+        /*
+        [HttpGet]
+        public IActionResult GetStudents([FromServices] IStudentsDal _dbStudentService)
         {
-            if (id < _dbService.ListLength())
-            {
-                return Ok(_dbService.GetStudent(id));
-            }
+            return Ok(_dbStudentService.GetStudents());
 
-            return NotFound("Nie znaleziono studenta");
         }
+        
+
+        [HttpGet("{indexNumber}")]
+        public IActionResult GetStudent(string indexNumber)
+        {
+            return Ok(_dbStudentService.GetStudent(indexNumber));
+        }
+
 
         [HttpPost]
         public IActionResult CreateStudent(Student student)
@@ -61,6 +85,7 @@ namespace Cw3.Controllers
 
             return Ok("Usuwanie zakonczono");
         }
+        */
 
 
     }

@@ -38,9 +38,9 @@ namespace Cw3.Services
 
         //ZAD. 4.2
 
-        public IEnumerable<Zad4> GetStudentsByEnrollment()
+        public IEnumerable<Cw4> GetStudentsByEnrollment()
         {
-            var list = new List<Zad4>();
+            var list = new List<Cw4>();
 
             using (SqlConnection con = new SqlConnection(ConString))
             using (SqlCommand com = new SqlCommand())
@@ -52,7 +52,7 @@ namespace Cw3.Services
                 SqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    var zad = new Zad4();
+                    var zad = new Cw4();
 
                     zad.FirstName = dr["FirstName"].ToString();
                     zad.LastName = dr["LastName"].ToString();
@@ -68,7 +68,7 @@ namespace Cw3.Services
 
 
         //Zad 4.3
-        public Zad4 GetStudentBySemester(string indexNumber)
+        public Cw4 GetStudentBySemester(string indexNumber)
         {
             using (SqlConnection con = new SqlConnection(ConString))
             using (SqlCommand com = new SqlCommand())
@@ -85,7 +85,7 @@ namespace Cw3.Services
                 SqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    var zad = new Zad4();
+                    var zad = new Cw4();
 
                     zad.FirstName = dr["FirstName"].ToString();
                     zad.LastName = dr["LastName"].ToString();

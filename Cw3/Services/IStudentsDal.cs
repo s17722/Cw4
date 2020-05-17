@@ -12,9 +12,9 @@ namespace Cw3.Services
         public Student GetStudent(string indexNumber);
 
         //Zad 4.2
-        public IEnumerable<Zad4> GetStudentsByEnrollment();
+        public IEnumerable<Cw4> GetStudentsByEnrollment();
 
         //Zad 4.3
-        public Zad4 GetStudentBySemester(string indexNumber);
+        public Cw4 GetStudentBySemester(string indexNumber);
     }
 }

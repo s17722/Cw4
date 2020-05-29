@@ -45,7 +45,7 @@ namespace Cw3.Middleware
                 }
                 catch (Exception exc)
                 {
-
+                    Console.WriteLine(exc.Message);
                 }
             }
 

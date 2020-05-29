@@ -7,12 +7,14 @@ using Cw3.DTOs.Requests;
 using Cw3.DTOs.Responses;
 using Cw3.Models;
 using Cw3.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cw3.Controllers
 {
-    [Route("api/enrollments")]
+    
     [ApiController]
     public class EnrollmentsController : ControllerBase
     {
@@ -25,7 +27,9 @@ namespace Cw3.Controllers
             _service = service;
         }
 
+        [Route("api/enrollments")]
         [HttpPost]
+        [Authorize(Roles = "employee")] 
 
         public IActionResult EnrollStudent(EnrollStudentRequest request)
         {
@@ -48,6 +52,15 @@ namespace Cw3.Controllers
             response.StartDate = DateTime.Now;
 
             return Ok(response);
+        }
+
+        [Route("api/enrollments/promotions")]
+        [HttpPost]
+        [Authorize(Roles = "employee")] 
+
+        public IActionResult PromoteStudents(int semester, int studies)
+        {
+            return Ok();
         }
     }
 }
